@@ -1,10 +1,5 @@
 import { useEffect, useState } from 'react';
 import Container from '../Component/Container';
-import byimg1 from '../assets/by1.png';
-import byimg2 from '../assets/by2.png';
-import byimg3 from '../assets/by3.png';
-import byimg4 from '../assets/by4.png';
-import byimgbig from '../assets/by5.png';
 import retting from '../assets/retting.png';
 import deleverybos from '../assets/deleverybos.png';
 import returticon from '../assets/returticon.png';
@@ -18,75 +13,74 @@ import Keyboard from '../assets/Keyboard.png';
 import Monitor from '../assets/Monitor.png';
 import AllSectionHeadding from '../Component/AllSectionHeadding';
 import BreadCrumb from '../Component/BreadCrumb';
+import { useParams } from "react-router";
 
 const ByNowPage = () => {
     const [selectedColor, setSelectedColor] = useState('blue');
+    const [selectedSize, setSelectedSize] = useState('M');
+    const [allproduct, setAllproduct] = useState(null);
+    const { id } = useParams();
 
     const colors = [
         { name: 'blue', hex: '#93c5fd' },
         { name: 'red', hex: '#f28b82' }
     ];
-
-    const [selectedSize, setSelectedSize] = useState('M');
     const sizes = ['XS', 'S', 'M', 'L', 'XL'];
-
-    const [allproduct, setAllproduct] = useState([]);
 
     async function GetProduct() {
         try {
-            const response = await fetch('https://dummyjson.com/products');
+            const response = await fetch(`https://dummyjson.com/products/${id}`);
             const data = await response.json();
-            setAllproduct(data.products || []);
-
+            setAllproduct(data); // ✅ store single product
+            console.log("Fetched product:", data);
         } catch (error) {
-            console.error("Error fetching products:", error);
-            setLoading(false);
+            console.error("Error fetching product:", error);
         }
-        console.log(allproduct)
     }
+
     useEffect(() => {
         GetProduct();
-    }, []);
+    }, [id]);
+
+    if (!allproduct) {
+        return (
+            <Container>
+                <p className="text-center py-20">Loading product...</p>
+            </Container>
+        );
+    }
 
     return (
         <>
             <Container>
                 <BreadCrumb />
                 <div className='w-full h-[600px] flex items-center justify-between'>
-                    <div className='w-[170px] h-full space-y-4'>
-                        <div className='w-[170px] h-[138px] bg-[#F5F5F5] rounded-[4px] flex justify-center items-center'>
-                            <img src={byimg1} alt="" className='cursor-pointer' />
-                        </div>
-                        <div className='w-[170px] h-[138px] bg-[#F5F5F5] rounded-[4px] flex justify-center items-center'>
-                            <img src={byimg2} alt="" className='cursor-pointer' />
-                        </div>
-                        <div className='w-[170px] h-[138px] bg-[#F5F5F5] rounded-[4px] flex justify-center items-center'>
-                            <img src={byimg3} alt="" className='cursor-pointer' />
-                        </div>
-                        <div className='w-[170px] h-[138px] bg-[#F5F5F5] rounded-[4px] flex justify-center items-center'>
-                            <img src={byimg4} alt="" className='cursor-pointer' />
-                        </div>
+                    
+                    {/* left small images */}
+                    <div className='w-[170px] h-full space-y-4 overflow-y-auto'>
+                        {allproduct.images?.slice(0, 4).map((img, index) => (
+                            <div key={index} className='w-[170px] h-[138px] bg-[#F5F5F5] rounded-[4px] flex justify-center items-center'>
+                                <img src={img} alt="" className='cursor-pointer h-full object-contain' />
+                            </div>
+                        ))}
                     </div>
 
                     {/* main big image */}
                     <div className='w-[500px] h-full flex items-center justify-center bg-[#F5F5F5] rounded-[4px]'>
-                        <img src={byimgbig} alt="" />
+                        <img src={allproduct.thumbnail} alt={allproduct.title} className="h-[80%] object-contain" />
                     </div>
 
                     {/* product details */}
                     <div className='w-[400px] h-full'>
-                        <h5 className='text-[24px] font-semibold'>Havic HV G-92 Gamepad</h5>
+                        <h5 className='text-[24px] font-semibold'>{allproduct.title}</h5>
                         <div className='flex items-center gap-2'>
                             <img src={retting} alt="" />
-                            <p className='text-gray-300'>(150 Reviews)</p>
-                            <p className='border-l-2 text-[#00FF66] px-3'>In Stock</p>
+                            <p className='text-gray-300'>({allproduct.rating} Reviews)</p>
+                            <p className='border-l-2 text-[#00FF66] px-3'>{allproduct.stock > 0 ? "In Stock" : "Out of Stock"}</p>
                         </div>
                         <div className='border-b-2 border-[#808080]'>
-                            <h4 className='text-[20px] font-medium mt-4'>$192.00</h4>
-                            <p className='py-[26px]'>
-                                PlayStation 5 Controller Skin High quality vinyl with air channel adhesive
-                                for easy bubble free install & mess free removal Pressure sensitive.
-                            </p>
+                            <h4 className='text-[20px] font-medium mt-4'>${allproduct.price}</h4>
+                            <p className='py-[26px]'>{allproduct.description}</p>
                         </div>
 
                         {/* color select section */}
@@ -119,10 +113,8 @@ const ByNowPage = () => {
                                     <div
                                         key={size}
                                         onClick={() => setSelectedSize(size)}
-                                        className={`flex items-center justify-center font-bold w-8 h-8 border-2 rounded-[4px] cursor-pointer${selectedSize === size
-                                                ? '!bg-[#DB4444]'
-                                                : 'bg-[#DB4444] text-black border-[#808080]'
-                                            }`}
+                                        className={`flex items-center justify-center font-bold w-8 h-8 border-2 rounded-[4px] cursor-pointer 
+                                        ${selectedSize === size ? '!bg-[#DB4444] text-white' : 'bg-white text-black border-[#808080]'}`}
                                     >
                                         <h6 className="text-sm">{size}</h6>
                                     </div>
@@ -137,7 +129,7 @@ const ByNowPage = () => {
                                     <AiOutlineMinus className='text-2xl cursor-pointer' />
                                 </div>
                                 <div className='text-2xl font-medium w-[80px] h-full flex items-center justify-center border-x-2 border-[#808080]'>
-                                    2
+                                    1
                                 </div>
                                 <div className='w-10 h-full flex items-center justify-center'>
                                     <FiPlus className='text-2xl font-medium cursor-pointer' />

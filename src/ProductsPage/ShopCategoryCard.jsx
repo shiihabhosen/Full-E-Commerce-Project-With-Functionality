@@ -40,8 +40,9 @@ const ShopCategoryCard = () => {
     const filteredProducts = allproduct.filter((cItem) => cItem.category === item);
     dispatch(filterReducer(filteredProducts));
   };
-  const handleProduct = () =>{
-     dispatch(filterReducer(allproduct));
+  const handleProduct = () => {
+    dispatch(filterReducer(allproduct));
+    localStorage.setItem("cart", JSON.stringify(allproduct))
   }
 
   return (
@@ -53,34 +54,34 @@ const ShopCategoryCard = () => {
         <div className='w-[184px]'>
           <h5 className='text-[20px] font-bold py-4'>Shop by Category</h5>
           <ul className='text-[16px] font-medium space-y-4'>
-            <li onClick={handleProduct}   className='hover:text-[#FF0000] select-none capitalize cursor-pointer'>AllProducts</li>
+            <li onClick={handleProduct} className='hover:text-[#FF0000] select-none capitalize cursor-pointer'>AllProducts</li>
             {categories.map((item, id) => (
-              <li 
-                key={id} 
-                className='hover:text-[#FF0000] select-none capitalize cursor-pointer' 
+              <li
+                key={id}
+                className='hover:text-[#FF0000] select-none capitalize cursor-pointer'
                 onClick={() => handFilter(item)}
               >
                 {item}
               </li>
             ))}
           </ul>
-  <div>
-              <h3 className='text-[20px] font-bold mb-[15px] mt-10'>Shop by Color</h3>
-              <ul className='flex flex-col gap-y-4 mb-10'>
-                <div className='flex items-center gap-2'>
-                  <div className='w-[11px] h-[11px] rounded-full bg-black hover:border-2 border-white'></div>
-                  <li><a href="">Color 1</a></li>
-                </div>
-                <div className='flex items-center gap-2'>
-                  <div className='w-[11px] h-[11px] rounded-full bg-[#FF0000] hover:border-2 border-black'></div>
-                  <li><a href="">Color 2</a></li>
-                </div>
-                <div className='flex items-center gap-2'>
-                  <div className='w-[11px] h-[11px] rounded-full bg-[#00FF38] hover:border-2 border-black'></div>
-                  <li><a href="">Color 3</a></li>
-                </div>
-              </ul>
-            </div>
+          <div>
+            <h3 className='text-[20px] font-bold mb-[15px] mt-10'>Shop by Color</h3>
+            <ul className='flex flex-col gap-y-4 mb-10'>
+              <div className='flex items-center gap-2'>
+                <div className='w-[11px] h-[11px] rounded-full bg-black hover:border-2 border-white'></div>
+                <li><a href="">Color 1</a></li>
+              </div>
+              <div className='flex items-center gap-2'>
+                <div className='w-[11px] h-[11px] rounded-full bg-[#FF0000] hover:border-2 border-black'></div>
+                <li><a href="">Color 2</a></li>
+              </div>
+              <div className='flex items-center gap-2'>
+                <div className='w-[11px] h-[11px] rounded-full bg-[#00FF38] hover:border-2 border-black'></div>
+                <li><a href="">Color 3</a></li>
+              </div>
+            </ul>
+          </div>
 
         </div>
 

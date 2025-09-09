@@ -64,7 +64,7 @@ const Fotter = () => {
             </div>
 
           </div>
-          <p className='text-white mt-[160px] text-center'>Copyright Rimel 2022. All right reserved by💚 <span className='font-bold text-[#be2edd]'><a href="https://wa.me/message/WPKJP6CGP3EVG1" target='blank'>Shihab Hosen</a></span></p>
+          <p className='text-white mt-[160px] text-center'>Copyright Shihab 2025. All right reserved by💚 <span className='font-bold text-[#be2edd]'><a href="https://wa.me/message/WPKJP6CGP3EVG1" target='blank'>Shihab Hosen</a></span></p>
         </Container>
       </div>
     </>

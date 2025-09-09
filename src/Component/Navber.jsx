@@ -7,8 +7,7 @@ import { HiOutlineShoppingCart } from "react-icons/hi2";
 import { AiOutlineUnorderedList } from "react-icons/ai";
 import { IoMdClose } from "react-icons/io";
 import { NavLink } from 'react-router';
-
-
+import { useSelector } from 'react-redux';
 
 
 
@@ -18,6 +17,8 @@ const Navber = () => {
     const toggolemeno = () => {
         setIsopen(!isopen)
     }
+ const cart = useSelector((state) => state.product.cart)
+console.log(cart);
 
     return (
         <>
@@ -40,9 +41,20 @@ const Navber = () => {
                             <input type="text" placeholder='What are you looking for?' className=' py-[7px] pl-5 pr-12 focus:outline-none bg-[#F5F5F5] rounded-[4px] text-[16px]' />
                             <HiMagnifyingGlass className=' absolute right-2 top-1/2 -translate-y-1/2 text-2xl' />
                         </div>
-                        <div className='flex items-center ml-4 gap-4 text-2xl'>
+                        <div className='flex items-center ml-4 gap-4 text-2xl relative'>
                             <AiOutlineHeart />
-                            <HiOutlineShoppingCart />
+                           <NavLink>
+                            <div>
+                                <NavLink to='/cart'>
+                                    <HiOutlineShoppingCart />
+                                <div className='w-5 h-5 bg-[#DB4444] rounded-full flex justify-center items-center text-[16px] text-white absolute top-[-2px] left-[55px]'>
+                                    {
+                                        cart.length
+                                    }
+                                </div>
+                                </NavLink>
+                            </div>
+                           </NavLink>
                         </div>
                     </div>
                     <button className='text-3xl cursor-pointer block md:hidden' onClick={toggolemeno}>

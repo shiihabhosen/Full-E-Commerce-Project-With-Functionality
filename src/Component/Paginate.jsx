@@ -4,7 +4,7 @@ import PropsCard from './PropsCard';
 import { useSelector } from 'react-redux';
 
 const Paginate = ({ itemsPerPage = 6 }) => {
-  const products = useSelector((state) => state.product.product) || []; 
+  const products = useSelector((state) => state.product.product) || [];
   const [itemOffset, setItemOffset] = useState(0);
 
   const endOffset = itemOffset + itemsPerPage;
@@ -21,9 +21,10 @@ const Paginate = ({ itemsPerPage = 6 }) => {
       {currentItems.length > 0 ? (
         currentItems.map((item) => (
           <div key={item.id} className="mb-10">
-            <PropsCard 
-            id ={item.id}
-              img={item.thumbnail} 
+            <PropsCard
+              productDetails={item}
+              id={item.id}
+              img={item.thumbnail}
               discounttext={item.discountPercentage}
               productName={item.title}
               price={item.price}

@@ -43,8 +43,8 @@ const router = createBrowserRouter([
          Component: About },
       { path: "contact", 
         Component: Contact },
-      { path: "bynow / : id",
-        Component: ByNowPage }, // ✅ সব ভুল path এর জন্য ErrorPage
+      { path: "bynow/:id",
+        Component: ByNowPage },
     ],
   },
 ]);

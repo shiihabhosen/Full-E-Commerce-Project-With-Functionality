@@ -28,10 +28,10 @@ const WishlistCard = ({ children, img, classNameBox, productName, price, oldpric
                             </div>
                             <div className="absolute bottom-[80px] left-0 right-0 translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 px-3">
                                 <button className="w-full bg-black text-white py-2 rounded-[4px] font-medium text-sm cursor-pointer">
-                                    <div className='flex items-center gap-2 justify-center'>
+                                    {/* <div className='flex items-center gap-2 justify-center'>
                                         <IoCartOutline className='text-2xl' />
                                         <h4> Add To Cart</h4>
-                                    </div>
+                                    </div> */}
                                 </button>
                             </div>
                             <div className='mt-[230px] px-3'>

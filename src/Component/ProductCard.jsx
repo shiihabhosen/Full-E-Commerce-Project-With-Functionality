@@ -11,6 +11,8 @@ const ProductCard = ({ items, classNameBox }) => {
   if (!items) {
     return null;
   }
+
+
   return (
 
     <>
@@ -37,9 +39,9 @@ const ProductCard = ({ items, classNameBox }) => {
         </div>
 
         {/* ✅ Add to Cart button (initially hidden, shows on hover) */}
-        <div className="absolute bottom-[80px] left-0 right-0 translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 px-3">
+        <div  className="absolute bottom-[80px] left-0 right-0 translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 px-3">
           <NavLink to='/cart'>
-            <button className="w-full bg-black text-white py-2 rounded-[4px] font-medium text-sm cursor-pointer">
+            <button onClick={handleaddtocard} className="w-full bg-black py-2 rounded-[4px] font-medium text-sm cursor-pointer">
               Add To Cart
             </button>
           </NavLink>
