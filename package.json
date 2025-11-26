@@ -13,7 +13,7 @@
     "@reduxjs/toolkit": "^2.8.2",
     "@tailwindcss/vite": "^4.1.11",
     "and": "^0.0.3",
-    "antd": "^5.27.0",
+    "antd": "^5.29.1",
     "axios": "^1.11.0",
     "countdown-date-time": "^1.0.4",
     "react": "^19.1.0",

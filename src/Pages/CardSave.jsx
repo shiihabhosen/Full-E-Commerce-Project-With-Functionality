@@ -6,7 +6,6 @@ import { MdKeyboardArrowUp, MdKeyboardArrowDown } from "react-icons/md";
 import { deleterReducer } from "../Slice/ProductSlice";
 
 const CardSave = ({ item, id }) => {
-
   const [quantity, setQuantity] = useState(1);
 
   const handleQuantityChange = (e) => {
@@ -16,7 +15,7 @@ const CardSave = ({ item, id }) => {
   const dispatch = useDispatch();
   const deleteClick = () => {
     dispatch(deleterReducer(id));
-    console.log("i am working")
+    console.log("i am working");
   };
 
   return (
@@ -45,10 +44,11 @@ const CardSave = ({ item, id }) => {
               value={quantity}
               onChange={handleQuantityChange}
             >
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
+              {Array.from({ length: 100 }, (_, i) => (
+                <option key={i + 1} value={i + 1}>
+                  {i + 1}
+                </option>
+              ))}
             </select>
           </div>
 
@@ -56,6 +56,7 @@ const CardSave = ({ item, id }) => {
             Total: ${(item.price * quantity).toFixed(2)}
           </h3>
         </div>
+        <div>dhhe </div>
       </div>
     </>
   );

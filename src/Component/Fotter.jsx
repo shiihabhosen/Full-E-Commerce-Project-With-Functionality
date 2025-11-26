@@ -37,10 +37,10 @@ const Fotter = () => {
               </div>
               <div className='w-[123px] space-y-[20px]'>
                 <h5 className='text-[20px] font-bold '>Account</h5>
+                <p><a href="">Wishlist</a></p>
                 <p><a href="">My Account</a></p>
                 <p><a href="">Login / Register</a></p>
                 <p><a href="">Cart</a></p>
-                <p><a href="">Wishlist</a></p>
                 <p><a href="">Shop</a></p>
               </div>
               <div className='w-[109px] space-y-[20px]'>

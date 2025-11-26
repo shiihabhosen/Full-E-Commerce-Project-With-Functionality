@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import ReactPaginate from 'react-paginate';
-import PropsCard from './PropsCard';
-import { useSelector } from 'react-redux';
+import React, { useState } from "react";
+import ReactPaginate from "react-paginate";
+import PropsCard from "./PropsCard";
+import { useSelector } from "react-redux";
+import AllShopCart from "../ProductsPage/AllShopCart";
 
-const Paginate = ({ itemsPerPage = 6 }) => {
+const Paginate = ({ itemsPerPage = 6, allproduct }) => {
   const products = useSelector((state) => state.product.product) || [];
   const [itemOffset, setItemOffset] = useState(0);
 
@@ -19,17 +20,18 @@ const Paginate = ({ itemsPerPage = 6 }) => {
   return (
     <>
       {currentItems.length > 0 ? (
-        currentItems.map((item) => (
-          <div key={item.id} className="mb-10">
-            <PropsCard
-              productDetails={item}
-              id={item.id}
-              img={item.thumbnail}
-              discounttext={item.discountPercentage}
-              productName={item.title}
-              price={item.price}
-              oldprice={Math.floor(item.price / (1 - item.discountPercentage / 100))}
-              reviwretting={item.reviews?.[0]?.rating || 0}
+        currentItems.map((phone) => (
+          <div key={phone.id} className="mb-10">
+            <AllShopCart
+            productDetails={phone}
+            id={phone.id}
+            img={phone.thumbnail}
+            discounttext={phone.discountPercentage}
+            productName={phone.title}
+            price={phone.price}
+            oldprice={Math.floor(phone.price / (1 - phone.discountPercentage / 100))}
+            reviwretting={phone.reviews?.[0]?.rating || 0}
+            rating={phone.rating}
             />
           </div>
         ))
